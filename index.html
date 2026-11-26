@@ -788,7 +788,7 @@ button {
               <span id="countdown-unit">segundos</span>
             </div>
 
-            <a id="redirect-now" class="redirect-now" href="#">Ir para a loja agora</a>
+            <a id="redirect-now" class="redirect-now" href="https://www.boutiquemariaatacado.com.br/?utm_source=quiz_site&utm_medium=tiktok&utm_campaign=impulsionamento">Ir para a loja agora</a>
             <p id="redirect-note" class="redirect-note">Você será direcionada automaticamente.</p>
           </section>
         </main>
@@ -819,7 +819,7 @@ const QUIZ_CONFIG = {
 
   redirectDelaySeconds: 5,
 
-  destination: "https://www.boutiquemariaatacado.com.br/",
+  destination: "https://www.boutiquemariaatacado.com.br/?utm_source=quiz_site&utm_medium=tiktok&utm_campaign=impulsionamento",
 };
 
 const labels = {
@@ -1025,7 +1025,8 @@ function buildDestination() {
   ];
 
   trackingKeys.forEach((key) => {
-    if (incomingParams.has(key)) {
+    // Não sobrescreve os parâmetros que já vêm fixos no link de destino (UTMs do TikTok).
+    if (incomingParams.has(key) && !destination.searchParams.has(key)) {
       destination.searchParams.set(key, incomingParams.get(key));
     }
   });
